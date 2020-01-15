@@ -103,4 +103,5 @@ int	main(int argc, char **argv)
 	printf("\033[0;33m");
 	printf("\nLines count --> %d", count);
 	printf("\033[0;0m");
+	while(1);
 }
