@@ -72,14 +72,10 @@ void	str_join(char **dst, char *src)
 
 int		return_value(char **stack, char **line)
 {
-	char *tmp;
-
 	*line = c_len(*stack, ENDL) > -1 ? ft_strndup(*stack, c_len(*stack, ENDL)) : 0;
 	if (c_len(*stack, ENDL) > -1)
 	{
-		tmp = ft_strndup(&(*stack)[c_len(*stack, ENDL) + 1], c_len(*stack, '\0'));
-		free(*stack);
-		*stack = tmp;
+		*stack += c_len(*stack, ENDL) + 1;
 		return (1);
 	}
 	else if (c_len(*stack, '\0') > 0)

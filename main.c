@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 		count++;
 		arrow();
 		printf(" %s |%d|\n", line1, ret);
+		free(line1);
 	}
 	printf("\033[0;33m");
 	printf("\nLines count --> %d", count);
@@ -58,7 +59,7 @@ int	main(int argc, char **argv)
 		count++;
 		arrow();
 		printf(" %s |%d|\n", line2, ret);
-
+		free(line2);
 	}
 	printf("\033[0;33m");
 	printf("\nLines count --> %d", count);
@@ -79,6 +80,7 @@ int	main(int argc, char **argv)
 		count++;
 		arrow();
 		printf(" %s |%d|\n", line3, ret);
+		free(line3);
 	}
 	printf("\033[0;33m");
 	printf("\nLines count --> %d", count);
@@ -99,9 +101,9 @@ int	main(int argc, char **argv)
 		count++;
 		arrow();
 		printf(" %s |%d|\n", line4, ret);
+		free(line4);
 	}
 	printf("\033[0;33m");
 	printf("\nLines count --> %d", count);
 	printf("\033[0;0m");
-	while(1);
 }

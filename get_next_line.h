@@ -1,7 +1,7 @@
 #ifndef GET_NEXT_LINE_H
  #define GET_NEXT_LINE_H
 
- #define BUFF_SIZE 10000
+ #define BUFF_SIZE 4096
  #define ENDL '\n'
 
  #include <unistd.h>
@@ -9,6 +9,7 @@
  #include <sys/uio.h>
  #include <stdlib.h>
  #include <fcntl.h>
+#include "Memd/mem.h"
 
 int		get_next_line(int fd, char **line);
 int		c_len(char *Str, char c);
