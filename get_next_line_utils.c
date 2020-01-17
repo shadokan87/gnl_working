@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/17 01:19:23 by motoure           #+#    #+#             */
+/*   Updated: 2020/01/17 01:20:00 by motoure          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int	c_len(char *str, char c)
+int		c_len(char *str, char c)
 {
 	int i;
 
@@ -24,8 +36,8 @@ int	c_len(char *str, char c)
 
 char	*ft_strndup(char *str, int len)
 {
-	char *ret;
-	int i;
+	char	*ret;
+	int		i;
 
 	i = 0;
 	if (!str)
@@ -43,9 +55,9 @@ char	*ft_strndup(char *str, int len)
 
 void	str_join(char **dst, char *src)
 {
-	int i;
-	char *tmp;
-	char *tmp2;
+	int		i;
+	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
 	if (!*dst)
@@ -53,8 +65,8 @@ void	str_join(char **dst, char *src)
 		*dst = ft_strndup(src, c_len(src, '\0'));
 		return ;
 	}
-	if (!(tmp = malloc(sizeof(char) * c_len(*dst, '\0') + c_len(src, '\0') + 1)))
-			return ;
+	if (!(tmp = malloc(S(char) * c_len(*dst, '\0') + c_len(src, '\0') + 1)))
+		return ;
 	tmp2 = *dst;
 	while (tmp2[i])
 	{
@@ -74,10 +86,12 @@ int		return_value(char **stack, char **line)
 {
 	char *tmp;
 
-	*line = c_len(*stack, ENDL) > -1 ? ft_strndup(*stack, c_len(*stack, ENDL)) : 0;
+	*line = c_len(*stack, ENDL) > -1 ?
+		ft_strndup(*stack, c_len(*stack, ENDL)) : 0;
 	if (c_len(*stack, ENDL) > -1)
 	{
-		tmp = ft_strndup(&(*stack)[c_len(*stack, ENDL) + 1], c_len(*stack, '\0'));
+		tmp = ft_strndup(&(*stack)[c_len(*stack, ENDL) + 1],
+				c_len(*stack, '\0'));
 		free(*stack);
 		*stack = tmp;
 		return (1);
@@ -89,5 +103,6 @@ int		return_value(char **stack, char **line)
 		*stack = NULL;
 		return (1);
 	}
+	*stack ? free(*stack) : 0;
 	return (0);
 }
