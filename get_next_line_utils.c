@@ -6,7 +6,7 @@
 /*   By: motoure <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 01:19:23 by motoure           #+#    #+#             */
-/*   Updated: 2020/01/17 01:20:00 by motoure          ###   ########.fr       */
+/*   Updated: 2020/01/18 06:31:13 by motoure          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,18 @@ void	str_join(char **dst, char *src)
 	char	*tmp2;
 
 	i = 0;
-	if (!*dst)
-	{
-		*dst = ft_strndup(src, c_len(src, '\0'));
-		return ;
-	}
 	if (!(tmp = malloc(S(char) * c_len(*dst, '\0') + c_len(src, '\0') + 1)))
 		return ;
 	tmp2 = *dst;
-	while (tmp2[i])
+	while (*tmp2)
 	{
-		tmp[i] = tmp2[i];
-		i++;
+		tmp[i] = *tmp2;
+		tmp2++ && i++;
 	}
+	free(*dst);
 	while (*src)
 	{
-		tmp[i] = *src;
+		tmp[i] = *src ? *src : '\0';
 		src++ && i++;
 	}
 	tmp[i] = '\0';
@@ -86,17 +82,16 @@ int		return_value(char **stack, char **line)
 {
 	char *tmp;
 
-	*line = c_len(*stack, ENDL) > -1 ?
-		ft_strndup(*stack, c_len(*stack, ENDL)) : 0;
 	if (c_len(*stack, ENDL) > -1)
 	{
+		*line = ft_strndup(*stack, c_len(*stack, ENDL));
 		tmp = ft_strndup(&(*stack)[c_len(*stack, ENDL) + 1],
 				c_len(*stack, '\0'));
 		free(*stack);
 		*stack = tmp;
 		return (1);
 	}
-	else if (c_len(*stack, '\0') > 0)
+	if (*stack && *stack[0] != '\0')
 	{
 		*line = ft_strndup(*stack, c_len(*stack, '\0'));
 		free(*stack);
@@ -104,5 +99,6 @@ int		return_value(char **stack, char **line)
 		return (1);
 	}
 	*stack ? free(*stack) : 0;
+	*stack = NULL;
 	return (0);
 }
